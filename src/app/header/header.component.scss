@@ -1,0 +1,44 @@
+.navbar {
+   background-color: #424245;
+}
+
+.header {
+   background-color: #5b5755;
+   font-family:  "Gill Sans", "Trebuchet MS", Verdana, Tahoma, Geneva, Helvetica, sans-serif;
+   text-transform: uppercase;
+   letter-spacing: 5px;
+   word-spacing: 1.8px;
+   color: #ffffff;
+   padding: 25px 45px;
+}
+
+
+h1 {
+	font-size: 1.2em;
+	color: #999;
+	margin-bottom: 0;
+}
+
+a {
+   color: #949494;
+   text-decoration: none;
+}
+
+a:hover {
+   color: rgb(74, 128, 199);
+   text-decoration: none;
+}
+
+a.settings {
+   font-family: 'Arial Narrow', Arial, sans-serif;
+   float: right;
+   width: 30px;
+   height: 30px;
+   margin-right: 5px;
+   color: #949494;
+}
+
+a.settings:hover {
+   color: rgb(86, 131, 190);
+   text-decoration: none;
+}

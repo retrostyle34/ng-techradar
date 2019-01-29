@@ -1,1 +1,174 @@
 /* You can add global styles to this file, and also import other style files */
+
+app-header {
+   position: absolute;
+   width: 100%;
+   z-index: 10000;
+}
+
+
+html, body { 
+   height: 100%; 
+   background-image: -webkit-gradient(linear, left top, right bottom, 
+      from(#c6d1de), color-stop(0.45, #a9afbd), to(#9499a3));
+}
+
+.header-menu {
+   max-width: 900px;
+   margin-left: auto;
+   margin-right:auto;
+}
+
+.container {
+   min-height: 100%;
+   max-width: 900px;
+   overflow: auto;
+   padding-top: 60px;
+   background-color: rgb(221, 221, 221);
+   box-shadow: 0 1px 3px rgba(0,0,0,.3);
+}
+
+#col1, #col2, #col3 {
+   margin-bottom: -9999px;
+   padding-bottom: 9999px;
+}
+
+.left { float: left;  padding: 0px; }
+.right { float: right;  padding: 0px; }
+
+h2 {
+   margin-top: 20px;
+   margin-bottom: 0;
+   font-size: 2.0rem;
+   font-family: "Segoe UI","Helvetica Neue","Helvetica",Arial,sans-serif;
+   font-weight: 100;
+}
+
+hr {
+   margin: 10px 0;
+}
+
+a {
+   color: #337ab7;
+}
+
+.module-item {
+   padding: 20px;
+}
+
+.list-mode {
+   width: 32px;
+   height: 30px;
+   text-align: center;
+   float: right;
+   font-size: 15pt;
+   margin: 10px 0 0 0;
+   padding: 5px;
+   color: #5b5755;
+   border-radius: 5px;
+}
+
+.list-mode:hover {
+   color: #4e4e4e;
+   background-color: rgb(180, 176, 174);
+}
+
+.list-mode-active {
+   color: #4e4e4e;
+   background-color: rgb(180, 176, 174);
+}
+
+.item-list {
+   background-color: rgb(136, 161, 194);
+   height: 32px; 
+   padding: 2px 15px;
+}
+
+.item-list-action {
+   color:#5b5755;
+   background-color: rgb(151, 169, 192);
+}
+
+.item-list-action:hover {
+   background-color: rgb(110, 112, 116);
+   color: rgb(151, 169, 192);
+}
+
+.item-element-active {
+   background-color: rgb(122, 125, 131);
+   color: rgb(151, 169, 192);
+}
+
+.module-item-details {
+   padding: 20px;
+   background-color: rgb(136, 161, 194);
+}
+
+.no-decor {
+   pointer-events: none;
+}
+
+.list-group-delete {
+   font-family: 'Gill Sans', 'Gill Sans MT', 'Trebuchet MS', sans-serif;
+   font-size: 14pt;
+   color:#5b5755;
+   // color: rgba(151, 169, 192, 0.5);
+   cursor: pointer;
+   z-index: 20;
+   order: 1;
+}
+
+.list-group-delete:hover {
+   font-family: 'Gill Sans', 'Gill Sans MT', 'Trebuchet MS', sans-serif;
+   color: rgb(219, 95, 95);
+   text-decoration: none;
+}
+
+
+.module-visual-board {
+   padding: 20px;
+}
+
+.test {
+   color: #5b5755;
+   color: #686462;
+   color: #746f6d;
+   color: #7e7977;
+   color: #888482;
+}
+
+.deap-blue {
+   color: #6e89ad;
+   color: #728eb2;
+   color: #7995b9;
+   color: #809abb;
+   color: #7f99bb;
+   color: #88a1c2;
+   color: #91a8c7;
+   color: #9bb1ce;
+   color: #a4b9d4;
+   color: #a8bbd4;
+   color: #b4c5db;
+   color: #bbcadd;
+}
+
+
+
+.form-group {
+   margin-bottom: 0;
+}
+
+input.ng-invalid.ng-touched {
+   border: 1px solid red;
+   border: 2px solid rgba(255, 0, 0, .5);
+}
+
+.help-block {
+   font-size: 10pt;
+   color: #7c7373;
+   margin-bottom: 5px;
+}
+
+textarea {
+   margin-bottom: 8px;
+}

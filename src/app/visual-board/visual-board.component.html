@@ -1,0 +1,40 @@
+<h2>{{title}}</h2>
+<hr>
+<svg class="col-md-12 right" [(attr.viewBox)]="viewBox">
+
+   <circle 
+      *ngFor="let level of levels; let i=index; let length = count;" 
+      cx="400" cy="400" 
+      [attr.r]="400 - (i*400/length)" 
+      [(attr.fill)]="radarColor[length-i-1]" />
+
+   <defs>
+      <radialGradient id="grad1" cx="60%" cy="60%" r="60%" fx="70%" fy="60%">
+         <stop offset="0%" style="stop-color:#bcd164; stop-opacity:1" />
+         <stop offset="100%" style="stop-color:#889c2c;stop-opacity:1" />
+      </radialGradient>
+   </defs>
+
+   
+   <a *ngFor="let item of items; let i=index; let length = count;">
+      <circle 
+         (click)="onSelect(item)"
+         [ngClass]="(activeItem==item.id)?'active-item-element':'item-element'"
+         [attr.cx]="positionX[i]" 
+         [attr.cy]="positionY[i]"
+         [attr.r]="radius" 
+         stroke="#f5ffbc" 
+         stroke-width="0.1" 
+         fill="url(#grad1)" />
+
+      <text 
+         class="item-text" 
+         [attr.x]="positionX[i]" 
+         [attr.y]="positionY[i]+3" 
+         font-size="10px" 
+         font-weight="bold" 
+         fill="black" 
+         style="text-anchor: middle;">{{i+1}}
+      </text>
+   </a>
+</svg>

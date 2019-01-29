@@ -1,0 +1,17 @@
+
+
+.item-element:hover {
+   cursor: pointer;
+   stroke: #ede7aa;
+   stroke-width: 2;
+}
+
+.active-item-element {
+   cursor: pointer;
+   stroke: #ede7aa;
+   stroke-width: 2;
+}
+
+.item-text {
+   pointer-events: none;
+}

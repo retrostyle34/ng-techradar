@@ -1,0 +1,109 @@
+<h2>{{title}}</h2>
+<hr>
+<!-- <form (ngSubmit)="onSubmit(f)" #f="ngForm"> -->
+      <div class="form-group form-row">
+         <label class="col-sm-3 col-form-label">Name</label>
+         <label class="col-sm-9 col-form-label">{{item.name}}</label>
+      </div>
+      <div class="form-group form-row">
+         <label for="staticType" class="col-sm-3 col-form-label">Type</label>
+         <label class="col-sm-9 col-form-label">{{item.type}}</label>
+      </div>
+      <div class="form-group form-row">
+         <label for="staticLevel" class="col-sm-3 col-form-label">Level</label>
+         <label class="col-sm-9 col-form-label">{{item.level}}</label>
+      </div>
+      <!-- <div class="form-group form-row">
+         <label for="staticDetails" class="col-sm-3 col-form-label">Details</label>
+         <label class="col-sm-9 col-form-label">{{item.details}}</label>
+      </div> -->
+      <div class="form-group form-row">
+         <label for="staticDetails" class="col-sm-3 col-form-label">Details</label>
+         <textarea 
+            class="form-control-plaintext form-control-sm col-sm-9"  
+            style="font-size: 12pt; overflow:auto"
+            id="staticDetails" 
+            rows="3"
+            readonly
+         >{{item.details}}</textarea>
+      </div>
+<!-- </form> -->
+
+<hr>
+
+<!-- <form (ngSubmit)="onSubmit(f)" #f="ngForm">
+      <div class="form-group form-row">
+         <label for="staticName" class="col-sm-3 col-form-label">Name</label>
+         <div class="col-sm-9">
+            <input 
+               type="text" 
+               id="staticName"
+               name="name"
+               class="form-control-plaintext form-control-sm" 
+               ngModel
+               #name="ngModel"
+               readonly
+            >
+            <div class="help-block" *ngIf="!name.valid && name.touched">Name is required!</div>
+         </div>
+      </div>
+      <div class="form-group form-row">
+         <label for="staticType" class="col-sm-3 col-form-label">Type</label>
+         <div class="col-sm-9">
+            <input 
+               type="text" 
+               id="staticType"
+               name="type"
+               class="form-control-plaintext form-control-sm" 
+               ngModel
+               readonly
+            >
+         </div>
+      </div>
+      <div class="form-group form-row">
+         <label for="staticLevel" class="col-sm-3 col-form-label">Level</label>
+         <div class="col-sm-9">
+            <select 
+               class="form-control-plaintext form-control-sm"
+               id="staticLevel"
+               name="level"
+               ngModel 
+               readonly
+               disabled>
+               <option>Adopt</option>
+               <option>Trial</option>
+               <option>Access</option>
+               <option>Hold</option>
+            </select>
+         </div>
+      </div>
+      <div class="form-group form-row">
+         <label for="staticDetails" class="col-sm-3 col-form-label">Details</label>
+         <div class="col-sm-9">
+            <textarea 
+               class="form-control-plaintext form-control-sm" 
+               id="staticDetails" 
+               name="details"
+               rows="3"
+               ngModel 
+               readonly
+            ></textarea>
+         </div>
+      </div>
+      <hr>
+      <button 
+         class="btn btn-sm btn-secondary" 
+         data-toggle="button" aria-pressed="false" autocomplete="off"
+         type="submit" 
+         [disabled]="!f.valid">{{ editMode ? 'Update' : 'Add'}}</button>
+      <button 
+         type="button"
+         class="btn btn-sm btn-secondary ml-2" 
+         [hidden]="f.values !== null"
+         (click)="clearForm()">Clear</button>
+      <button 
+         type="button"
+         class="btn btn-sm btn-secondary ml-2" 
+         (click)="onCancel()">Cancel</button>
+   </form>
+<hr> -->

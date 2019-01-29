@@ -1,0 +1,40 @@
+<link rel='stylesheet' href='https://use.fontawesome.com/releases/v5.6.3/css/all.css'>
+<div>
+   <div> 
+      <h2><a>{{title}}</a>
+         <i 
+            (click)="onEdit()" 
+            [ngClass]="(mode==3)?'list-mode-active':'list-mode'"
+            class="fas fa-pencil-alt list-mode"  
+            title="Edit Mode">
+         </i>
+         <i 
+            (click)="onDetails()" 
+            [ngClass]="(mode==2)?'list-mode-active':'list-mode'"
+            class="far fa-eye list-mode" 
+            title="Show Details"></i>
+         <i 
+            (click)="onAdd()" 
+            [ngClass]="(mode==1)?'list-mode-active':'list-mode'"
+            class="fas fa-plus list-mode" 
+            title="Add New"></i>
+      </h2> 
+   </div>
+</div>
+<hr>
+
+<div>
+   <ul class="list-group mt-2">
+      <li class="list-group-item item-list item-list-action" 
+         *ngFor="let item of items; let i = index;"
+         (click)="onSelect(item)"
+         [ngClass]="(selectedItem==item.id)?'item-element-active':'item-element'">
+         <!-- (click)="!deleteEvent ? onDetails(item.id) : onSelect()" -->
+         <span class="no-decor">{{item.name}}</span>
+         <span 
+            (click)="onDelete(item.id)" 
+            class="list-group-delete right">X
+         </span>
+      </li>
+   </ul>
+</div>
