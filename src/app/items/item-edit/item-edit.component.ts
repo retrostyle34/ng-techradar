@@ -28,25 +28,29 @@ export class ItemEditComponent implements OnInit, OnDestroy {
          (data: any) => {
             this.title = data['title'];
             this.itemService.activeMode.next(data['mode']);
+            console.log("Mode: " + data['mode']);
+            
             if(data['mode']==3) {
                var id = this.route.snapshot.params['id'];
                this.itemService.getItem(id);
+
+               this.subscription = this.itemService.activeItem.subscribe(
+                  (item: Item) => {
+                     this.item = item;
+                     this.editMode = true;
+                     this.form.setValue({
+                        name: item.name,
+                        level: item.level,
+                        type: item.type,
+                        details: item.details,
+                     });
+                  }
+               );
             }
             console.log('mode subscription: '+data['mode']);
          }
       );
-      this.subscription = this.itemService.activeItem.subscribe(
-         (item: Item) => {
-            this.item = item;
-            this.editMode = true;
-            this.form.setValue({
-               name: item.name,
-               level: item.level,
-               type: item.type,
-               details: item.details,
-            });
-         }
-      );
+      
    }
 
    ngOnDestroy() {

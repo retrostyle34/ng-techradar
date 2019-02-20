@@ -21,6 +21,7 @@ import { TypeListComponent } from './settings/type-list/type-list.component';
 import { TypeNewComponent } from './settings/type-new/type-new.component';
 import { Item } from './items/item';
 import { HttpClientModule } from '@angular/common/http';
+import { ItemAddComponent } from './items/item-add/item-add.component';
 
 @NgModule({
    declarations: [
@@ -39,6 +40,7 @@ import { HttpClientModule } from '@angular/common/http';
       TypeListComponent,
       TypeEditComponent,
       TypeNewComponent,
+      ItemAddComponent,
    ],
    imports: [
       AngularFontAwesomeModule,

@@ -35,9 +35,9 @@ export class VisualBoardComponent implements OnInit, OnDestroy {
    positionX: any = [150, 200, 360, 75, 290, 350, 260, 80,];
    positionY: any = [150, 240, 360, 320, 170, 70, 320, 230];
    radius = 12;
-   activeItem: any;
-   selectedItem: number;
+   activeItem: number;
    itemSubscription: Subscription;
+   selectedItemSubscription: Subscription;
 
    constructor(public itemService: ItemService,
       private route: ActivatedRoute,
@@ -50,15 +50,9 @@ export class VisualBoardComponent implements OnInit, OnDestroy {
             this.items = items;
       });
       
-      this.route.data.subscribe(
-         (data: any) => {
-            var id = this.route.snapshot.params['id'];
-            console.log(id);
-            
-            if(id != undefined) {
-               this.itemService.getItem(id);
-            }
-            console.log('mode subscription: '+data['mode']);
+      this.selectedItemSubscription = this.itemService.activeItem.subscribe(
+         (item: Item) => {
+            this.activeItem = item.id;
          }
       );
    }
@@ -68,14 +62,6 @@ export class VisualBoardComponent implements OnInit, OnDestroy {
       console.log('unsubscribe all from VB');
       this.itemSubscription.unsubscribe();
    }
-
-
-   // getItems() {
-   //    this.itemService.getItems().subscribe((data: Item) => {
-   //       console.log('Get items call from Visual Board');
-   //       this.items = this.itemService.getItems();
-   //    });
-   // }
 
 
    // private getLevels() {
@@ -89,13 +75,6 @@ export class VisualBoardComponent implements OnInit, OnDestroy {
    onSelect(item: Item) {
       this.router.navigate(['/items/details/' + item.id]);
       this.activeItem=item.id;
-      this.selectedItem = item.id;
       this.itemService.setActiveItem(item);
    }
-
-   // showDetails(id: string) {
-   //    console.log("show details");
-   //    this.router.navigate(['/items/details/' + id]);
-   // }
-
 }

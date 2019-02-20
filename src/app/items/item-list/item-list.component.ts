@@ -34,14 +34,14 @@ export class ItemListComponent implements OnInit, OnDestroy {
       this.modeSubscription = this.itemService.activeMode.subscribe(
          (mode: number) => { 
             this.mode = mode;
-            this.selectedItemSubscription = this.itemService.activeItem.subscribe(
-               (item: Item) => {
-                  this.selectedItem = +item.id;
-               }
-            );
+             
          }
       );
-      
+      this.selectedItemSubscription = this.itemService.activeItem.subscribe(
+         (item: Item) => {
+            this.selectedItem = +item.id;
+         }
+      );
       
       // Subscribe and redirect if there is any id used
       this.route.data.subscribe(
@@ -74,8 +74,8 @@ export class ItemListComponent implements OnInit, OnDestroy {
          console.log("selected item: "+ item.id);
          this.itemService.setActiveItem(item);
       } else if(this.mode == 1) {
-         this.itemService.activeMode.next(3);
-         this.router.navigate([`/items/edit/${item.id}`]);
+         this.itemService.activeMode.next(1);
+         this.router.navigate([`/items/add`]);
       } else if(this.mode == 2) {
          this.itemService.setActiveItem(item);
          this.router.navigate([`/items/details/${item.id}`]);

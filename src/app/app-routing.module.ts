@@ -10,12 +10,13 @@ import { LevelListComponent } from './settings/level-list/level-list.component';
 import { TypeListComponent } from './settings/type-list/type-list.component';
 import { TypeNewComponent } from './settings/type-new/type-new.component';
 import { TypeEditComponent } from './settings/type-edit/type-edit.component';
+import { ItemAddComponent } from './items/item-add/item-add.component';
 
 const routes: Routes = [
    { path: '', redirectTo: '/items', pathMatch: 'full' },
    { path: "items/:id", component: ItemsComponent, data: { title: 'Item List', mode: 0 }},
    { path: "items", component: ItemsComponent, data: { title: 'Item List', mode: 0 }, children: [
-      { path: "add", component: ItemEditComponent, data: { title: 'New Item', mode: 1 }},
+      { path: "add", component: ItemAddComponent, data: { title: 'New Item', mode: 1 }},
       { path: "details/:id", component: ItemDetailsComponent, data: { title: 'Item Details', mode: 2 }},
       { path: "edit/:id", component: ItemEditComponent, data: { title: 'Edit Item', mode: 3 }},
    ] },
