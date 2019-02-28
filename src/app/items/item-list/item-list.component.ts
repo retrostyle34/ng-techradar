@@ -28,19 +28,13 @@ export class ItemListComponent implements OnInit, OnDestroy {
    ngOnInit() {
       this.items = this.itemService.getItems();
       this.itemsSubscription = this.itemService.activeItems.subscribe(
-         (items: Item[]) => {
-            this.items = items;
-      });
+         (items: Item[]) => this.items = items
+      );
       this.modeSubscription = this.itemService.activeMode.subscribe(
-         (mode: number) => { 
-            this.mode = mode;
-             
-         }
+         (mode: number) => this.mode = mode 
       );
       this.selectedItemSubscription = this.itemService.activeItem.subscribe(
-         (item: Item) => {
-            this.selectedItem = +item.id;
-         }
+         (item: Item) => this.selectedItem = +item.id
       );
       
       // Subscribe and redirect if there is any id used
@@ -70,18 +64,14 @@ export class ItemListComponent implements OnInit, OnDestroy {
    onSelect(item: Item) {
       this.selectedItem = item.id;
       this.item = item;
-      if(this.mode == 0) {
-         console.log("selected item: "+ item.id);
-         this.itemService.setActiveItem(item);
-      } else if(this.mode == 1) {
-         this.itemService.activeMode.next(1);
-         this.router.navigate([`/items/add`]);
-      } else if(this.mode == 2) {
-         this.itemService.setActiveItem(item);
-         this.router.navigate([`/items/details/${item.id}`]);
-      } else if(this.mode == 3) {
-         this.itemService.setActiveItem(item);
-         this.router.navigate([`/items/edit/${item.id}`]);
+      
+      this.itemService.setActiveItem(item);
+      switch (this.mode) {
+         case 0: console.log("selected item: "+ item.id); break;
+         case 1: this.router.navigate([`/items/add`]); break;
+         case 2: this.router.navigate([`/items/details/${item.id}`]); break;
+         case 3: this.router.navigate([`/items/edit/${item.id}`]); break;
+         default: console.log("selected item: "+ item.id); break;
       }
    }
 
@@ -91,6 +81,7 @@ export class ItemListComponent implements OnInit, OnDestroy {
       if(this.mode==1) {
          this.itemService.activeMode.next(1);
          this.router.navigate(['/items/add']);
+         console.log("On Add");
       } else {
          this.router.navigate(['/items']);
       }

@@ -1,11 +1,29 @@
+<link rel='stylesheet' href='https://use.fontawesome.com/releases/v5.6.3/css/all.css'>
 <div class="container col-sm-8">
 
    <div class="col-sm-6 module-item left">
       <router-outlet>
-            <nav class="nav">
-               <a class="nav-link pl-0 active" routerLink="levels"><h2>Levels</h2></a>
-               <a class="nav-link" routerLink="types"><h2>Types</h2></a>
-            </nav>
+         <!-- <nav class="nav">
+            <a class="nav-link pl-0 active" routerLink="levels"><h2>Levels</h2></a>
+            <a class="nav-link" routerLink="types"><h2>Types</h2></a>
+         </nav> -->
+         <h2><a>{{title}}</a>
+            <i (click)="onLevelEdit()" 
+               [ngClass]="(mode==3)?'list-mode-active':'list-mode'"
+               class="fas fa-pencil-alt list-mode"  
+               title="Edit Mode">
+            </i>
+            <i (click)="onLevelDetails()" 
+               [ngClass]="(mode==2)?'list-mode-active':'list-mode'"
+               class="far fa-eye list-mode" 
+               title="Show Details">
+            </i>
+            <i (click)="onLevelAdd()" 
+               [ngClass]="(mode==1)?'list-mode-active':'list-mode'"
+               class="fas fa-plus list-mode" 
+               title="Add New">
+            </i>
+         </h2>
          <hr>
       </router-outlet>
    </div>

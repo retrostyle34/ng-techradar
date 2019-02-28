@@ -1,3 +1,74 @@
-<p>
-  item-add works!
-</p>
+<h2>{{title}}</h2>
+<hr>
+
+<form (ngSubmit)="onSubmit(f)" #f="ngForm">
+   <div class="form-group form-row">
+      <label for="staticName" class="col-sm-3 col-form-label">Name</label>
+      <div class="col-sm-9">
+         <input 
+            type="text" 
+            id="staticName"
+            name="name"
+            class="form-control form-control-sm" 
+            required
+            ngModel
+            #name="ngModel"
+         >
+         <div class="help-block" *ngIf="!name.valid && name.touched">Name is required!</div>
+      </div>
+   </div>
+   <div class="form-group form-row">
+      <label for="staticType" class="col-sm-3 col-form-label">Type</label>
+      <div class="col-sm-9">
+         <input 
+            type="text" 
+            id="staticType"
+            name="type"
+            class="form-control form-control-sm" 
+            ngModel
+         >
+      </div>
+   </div>
+   <div class="form-group form-row">
+      <label for="staticLevel" class="col-sm-3 col-form-label">Level</label>
+      <div class="col-sm-9">
+         <select 
+            class="form-control form-control-sm"
+            id="staticLevel"
+            name="level"
+            ngModel>
+            <option>Adopt</option>
+            <option>Trial</option>
+            <option>Access</option>
+            <option>Hold</option>
+         </select>
+      </div>
+   </div>
+   <div class="form-group form-row">
+      <label for="staticDetails" class="col-sm-3 col-form-label">Details</label>
+      <div class="col-sm-9">
+         <textarea 
+            class="form-control form-control-sm" 
+            id="staticDetails" 
+            name="details"
+            rows="3"
+            ngModel
+         ></textarea>
+      </div>
+   </div>
+   <hr>
+   <button 
+      class="btn btn-sm btn-secondary" 
+      data-toggle="button" aria-pressed="false" autocomplete="off"
+      type="submit" 
+      [disabled]="!f.valid">{{ editMode ? 'Update' : 'Add'}}</button>
+   <button 
+      type="button"
+      class="btn btn-sm btn-secondary ml-2" 
+      [hidden]="f.values !== null"
+      (click)="clearForm()">Clear</button>
+   <button 
+      type="button"
+      class="btn btn-sm btn-secondary ml-2" 
+      (click)="onCancel()">Cancel</button>
+</form>

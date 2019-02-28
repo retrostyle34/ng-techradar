@@ -14,7 +14,7 @@ import { ItemAddComponent } from './items/item-add/item-add.component';
 
 const routes: Routes = [
    { path: '', redirectTo: '/items', pathMatch: 'full' },
-   { path: "items/:id", component: ItemsComponent, data: { title: 'Item List', mode: 0 }},
+   // { path: "items/:id", component: ItemsComponent, data: { title: 'Item List', mode: 0 }},
    { path: "items", component: ItemsComponent, data: { title: 'Item List', mode: 0 }, children: [
       { path: "add", component: ItemAddComponent, data: { title: 'New Item', mode: 1 }},
       { path: "details/:id", component: ItemDetailsComponent, data: { title: 'Item Details', mode: 2 }},

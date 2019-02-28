@@ -50,7 +50,10 @@ export class ItemService implements OnInit {
             console.log(res);
             this.activeItem.next(res);
             return res;
-         }, error => catchError(this.handleError<any>(`get item details error: ${error}`))
+         }, error => {
+            catchError(this.handleError<any>(`get item details error: ${error}`));
+            // this.activeMode.next(0);
+         }
       );
       return null;
    }

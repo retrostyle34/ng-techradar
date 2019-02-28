@@ -7,6 +7,7 @@ import { ItemsComponent } from './items/items.component';
 import { ItemDetailsComponent } from './items/item-details/item-details.component';
 import { HeaderComponent } from './header/header.component';
 import { VisualBoardComponent } from './visual-board/visual-board.component';
+import { ItemAddComponent } from './items/item-add/item-add.component';
 import { ItemEditComponent } from './items/item-edit/item-edit.component';
 import { ItemListComponent } from './items/item-list/item-list.component';
 import { AngularFontAwesomeModule } from 'angular-font-awesome';
@@ -21,7 +22,6 @@ import { TypeListComponent } from './settings/type-list/type-list.component';
 import { TypeNewComponent } from './settings/type-new/type-new.component';
 import { Item } from './items/item';
 import { HttpClientModule } from '@angular/common/http';
-import { ItemAddComponent } from './items/item-add/item-add.component';
 
 @NgModule({
    declarations: [
@@ -31,6 +31,7 @@ import { ItemAddComponent } from './items/item-add/item-add.component';
       HeaderComponent,
       OcticonDirective,
       VisualBoardComponent,
+      ItemAddComponent,
       ItemEditComponent,
       ItemListComponent,
       LevelListComponent,
@@ -40,7 +41,6 @@ import { ItemAddComponent } from './items/item-add/item-add.component';
       TypeListComponent,
       TypeEditComponent,
       TypeNewComponent,
-      ItemAddComponent,
    ],
    imports: [
       AngularFontAwesomeModule,
