@@ -1,2 +1,14 @@
-<button class="btn btn-sm btn-secondary" (click)="onAdd()">New Level</button>
-
+<div>
+   <ul class="list-group mt-2">
+      <li class="list-group-item item-list item-list-action" 
+         *ngFor="let level of levels; let i = index;"
+         (click)="onSelect(level)"
+         [ngClass]="(selectedLevel==level.id)?'item-element-active':'item-element'">
+         <span class="no-decor">{{level.name}}</span>
+         <span 
+            (click)="onDelete(level.id)" 
+            class="list-group-delete right">X
+         </span>
+      </li>
+   </ul>
+</div>
