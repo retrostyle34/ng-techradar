@@ -12,7 +12,7 @@ import { NgForm } from '@angular/forms';
 export class ItemAddComponent implements OnInit {
 
    title: string = 'New Item';
-   @ViewChild('f') form: NgForm;
+   @ViewChild('formRef') form: NgForm;
    submitted = false;
    item : Item; 
    subscription: Subscription;
@@ -38,13 +38,19 @@ export class ItemAddComponent implements OnInit {
 
 
    onSubmit() {
+      this.submitted = true;
       this.item = this.form.value;
       this.itemService.addItem(this.item).subscribe(
-         _ => this.itemService.getItems()
+         () => {
+            setTimeout(() => {
+               this.itemService.getItems();
+               this.form.reset();
+               this.itemService.reset();
+               this.router.navigate(['/items'], { relativeTo: this.route, queryParamsHandling: 'preserve' });
+               this.submitted = false;
+            }, 2000);
+         }
       );
-      this.form.reset();
-      this.itemService.reset();
-      this.router.navigate(['/items'], { relativeTo: this.route, queryParamsHandling: 'preserve' });
    }
 
 
@@ -59,6 +65,8 @@ export class ItemAddComponent implements OnInit {
    
    
    onCancel() {
+      console.log(this.form);
+      
       this.form.reset();
       this.itemService.reset();
       this.router.navigate(['/items'],{relativeTo: this.route, queryParamsHandling: 'preserve'});

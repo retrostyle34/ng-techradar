@@ -20,7 +20,7 @@ const httpOptions = {
 export class LevelService implements OnInit {
 
    private levels: Level[] = [];
-   private level: Level;
+   private level: Level = null;
    activeLevels = new Subject<Level[]>();
    activeLevel = new Subject<Level>();
    activeMode = new Subject<number>();

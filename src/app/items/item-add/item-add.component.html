@@ -1,7 +1,7 @@
 <h2>{{title}}</h2>
 <hr>
 
-<form (ngSubmit)="onSubmit(f)" #f="ngForm">
+<form #formRef="ngForm">
    <div class="form-group form-row">
       <label for="staticName" class="col-sm-3 col-form-label">Name</label>
       <div class="col-sm-9">
@@ -9,12 +9,13 @@
             type="text" 
             id="staticName"
             name="name"
+            #nameRef="ngModel"
             class="form-control form-control-sm" 
-            required
+            [class.ng-touched]="nameRef.dirty && nameRef.invalid"
             ngModel
-            #name="ngModel"
+            required
          >
-         <div class="help-block" *ngIf="!name.valid && name.touched">Name is required!</div>
+         <div class="warning-block" *ngIf="nameRef.invalid && (nameRef.touched || nameRef.dirty)">Name is required!</div>
       </div>
    </div>
    <div class="form-group form-row">
@@ -52,20 +53,20 @@
             id="staticDetails" 
             name="details"
             rows="3"
-            ngModel
-         ></textarea>
+            ngModel>
+         </textarea>
       </div>
    </div>
    <hr>
    <button 
       class="btn btn-sm btn-secondary" 
       data-toggle="button" aria-pressed="false" autocomplete="off"
-      type="submit" 
-      [disabled]="!f.valid">{{ editMode ? 'Update' : 'Add'}}</button>
+      type="submit" (tsSubmitIfValid)="onSubmit()"
+      [disabled]="submitted">{{ submitted ? 'Submitting...' : 'Add'}}</button>
    <button 
       type="button"
       class="btn btn-sm btn-secondary ml-2" 
-      [hidden]="f.values !== null"
+      [hidden]="formRef.values !== null"
       (click)="clearForm()">Clear</button>
    <button 
       type="button"

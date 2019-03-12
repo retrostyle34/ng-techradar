@@ -12,9 +12,9 @@ export class ItemListComponent implements OnInit, OnDestroy {
 
    title: string = 'Item List';
    items: Item[] = [];
-   item: Item;
+   selectedItem: Item;
    deleteEvent: boolean = false;
-   selectedItem: number;
+   // selectedItem: number;
    mode: number = 0;
    itemsSubscription: Subscription;
    modeSubscription: Subscription;
@@ -34,7 +34,7 @@ export class ItemListComponent implements OnInit, OnDestroy {
          (mode: number) => this.mode = mode 
       );
       this.selectedItemSubscription = this.itemService.activeItem.subscribe(
-         (item: Item) => this.selectedItem = +item.id
+         (item: Item) => this.selectedItem = item
       );
       
       // Subscribe and redirect if there is any id used
@@ -62,8 +62,8 @@ export class ItemListComponent implements OnInit, OnDestroy {
 
 
    onSelect(item: Item) {
-      this.selectedItem = item.id;
-      this.item = item;
+      this.selectedItem = item;
+      // this.item = item;
       
       this.itemService.setActiveItem(item);
       switch (this.mode) {
@@ -93,10 +93,10 @@ export class ItemListComponent implements OnInit, OnDestroy {
       
       if(this.mode==2) {
          this.itemService.activeMode.next(2);
-         if(this.item != null) {
-            console.log('item id: '+ this.item.id);
-            this.itemService.activeItem.next(this.item);
-            this.router.navigate(['/items/details/'+this.item.id]);
+         if(this.selectedItem != null) {
+            console.log('item id: '+ this.selectedItem.id);
+            this.itemService.activeItem.next(this.selectedItem);
+            this.router.navigate(['/items/details/'+this.selectedItem.id]);
          }
       } else {
          this.router.navigate(['/items']);
@@ -108,10 +108,10 @@ export class ItemListComponent implements OnInit, OnDestroy {
       this.mode = (this.mode==3) ? 0 : 3;
       if(this.mode==3) {
          this.itemService.activeMode.next(3);
-         if(this.item != null) {
-            console.log('item id: '+ this.item.id);
-            this.itemService.activeItem.next(this.item);
-            this.router.navigate(['/items/edit/'+this.item.id]);
+         if(this.selectedItem != null) {
+            console.log('item id: '+ this.selectedItem.id);
+            this.itemService.activeItem.next(this.selectedItem);
+            this.router.navigate(['/items/edit/'+this.selectedItem.id]);
          }
       } else {
          this.router.navigate(['/items']);

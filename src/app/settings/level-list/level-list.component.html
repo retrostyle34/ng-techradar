@@ -1,9 +1,37 @@
+<h2><a>{{title}}</a>
+   <i (click)="onLevelEdit()" 
+      [class.active]="mode === 3"
+      class="fas fa-pencil-alt list-mode"  
+      title="Edit Mode">
+   </i>
+   <i (click)="onLevelDetails()" 
+      [class.active]="mode === 2"
+      class="far fa-eye list-mode" 
+      title="Show Details">
+   </i>
+   <i (click)="onLevelAdd()" 
+      [class.active]="mode === 1"
+      class="fas fa-plus list-mode" 
+      title="Add new level">
+   </i>
+
+   <!-- <i section="/levels" appMode="details" class="fas fa-plus list-mode" title="Level Details"></i> -->
+   <!-- <i detailsSection="/levels" detailsMode="details" detailsIcon="far fa-eye" (listClick)="onXDetails()" class="far fa-eye list-mode" title="Add New"></i> -->
+   
+   <!-- <i detailsSection="/levels" detailsMode="details" detailsIcon="far fa-eye" (click)="onLevelDetails()" class="far fa-eye list-mode" title="Add New"></i> -->
+   <!-- <i listSection="/levels" listMode="add" listIcon="fas fa-plus" (click)="onLevelAdd()" class="fas fa-plus list-mode" title="Add New"></i> -->
+
+   
+</h2>
+<hr>
+<ng-content></ng-content>
+
 <div>
    <ul class="list-group mt-2">
-      <li class="list-group-item item-list item-list-action" 
+      <li class="list-group-item list-row" 
          *ngFor="let level of levels; let i = index;"
          (click)="onSelect(level)"
-         [ngClass]="(selectedLevel==level.id)?'item-element-active':'item-element'">
+         [class.selected]="selectedLevel === level">
          <span class="no-decor">{{level.name}}</span>
          <span 
             (click)="onDelete(level.id)" 

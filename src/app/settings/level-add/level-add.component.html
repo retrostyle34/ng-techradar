@@ -1,0 +1,68 @@
+<form #formRef="ngForm" class="form">
+   <div class="form-body">
+      <div class="form-group form-row">
+         <label for="name" class="col-sm-3 form-label noselect">Name</label>
+         <div class="col-sm-9">
+            <input 
+               type="text" 
+               id="name" 
+               name="name" 
+               #nameRef="ngModel" 
+               class="form-control form-control-sm"
+               [class.ng-touched]="nameRef.dirty && nameRef.invalid" 
+               ngModel 
+               required>
+            <div class="warning-section" *ngIf="nameRef.invalid && (nameRef.touched || nameRef.dirty)">Name is
+               required!</div>
+         </div>
+      </div>
+
+      <div class="form-group form-row">
+         <label for="details" class="col-sm-3 form-label noselect">Details</label>
+         <div class="col-sm-9">
+            <textarea 
+               class="form-control form-control-sm small" 
+               id="details" 
+               name="details" 
+               rows="3"
+               ngModel>
+            </textarea>
+         </div>
+      </div>
+      <div class="form-group form-row">
+         <label for="staticLevel" class="col-sm-3 form-label noselect">Position</label>
+         <div class="col-sm-9">
+            <select class="form-control form-control-sm" id="staticLevel" name="level" ngModel>
+               <option>1</option>
+               <option>2</option>
+               <option>3</option>
+               <option>4</option>
+               <option>5</option>
+               <option>6</option>
+            </select>
+         </div>
+      </div>
+   </div>
+   <div class="form-footer">
+      <div class="form-row">
+         <div class="col-sm-3"></div>
+         <div class="col-sm-9">
+            <button 
+               class="btn btn-sm btn-secondary" 
+               (tsSubmitIfValid)="!formRef.pending && onSubmit()">
+               Add
+            </button>
+            <button 
+               class="btn btn-sm btn-secondary ml-2" 
+               [hidden]="!formRef.dirty" (click)="onClear()">
+               Clear
+            </button>
+            <button 
+               class="btn btn-sm btn-secondary ml-2" 
+               (click)="onCancel()">
+               Cancel
+            </button>
+         </div>
+      </div>
+   </div>
+</form>

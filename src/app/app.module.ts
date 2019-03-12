@@ -14,14 +14,19 @@ import { AngularFontAwesomeModule } from 'angular-font-awesome';
 import { OcticonDirective } from './shared/octicon.directive';
 import { FormsModule } from '@angular/forms';
 import { SettingsComponent } from './settings/settings.component';
+import { LevelAddComponent } from './settings/level-add/level-add.component';
 import { LevelEditComponent } from './settings/level-edit/level-edit.component';
 import { LevelListComponent } from './settings/level-list/level-list.component';
-import { LevelNewComponent } from './settings/level-new/level-new.component';
 import { TypeEditComponent } from './settings/type-edit/type-edit.component';
 import { TypeListComponent } from './settings/type-list/type-list.component';
 import { TypeNewComponent } from './settings/type-new/type-new.component';
 import { Item } from './items/item';
 import { HttpClientModule } from '@angular/common/http';
+import { SubmitIfValidDirective } from './shared/submit.directive';
+import { LevelDetailsComponent } from './settings/level-details/level-details.component';
+import { AddDirective } from './shared/add.directive';
+import { DebounceClickDirective } from './shared/debounce-click.directive';
+import { DetailsDirective } from './shared/details.directive';
 
 @NgModule({
    declarations: [
@@ -36,11 +41,16 @@ import { HttpClientModule } from '@angular/common/http';
       ItemListComponent,
       LevelListComponent,
       LevelEditComponent,
-      LevelNewComponent,
+      LevelAddComponent,
       SettingsComponent,
       TypeListComponent,
       TypeEditComponent,
       TypeNewComponent,
+      SubmitIfValidDirective,
+      AddDirective,
+      DetailsDirective,
+      DebounceClickDirective,
+      LevelDetailsComponent,
    ],
    imports: [
       AngularFontAwesomeModule,

@@ -6,111 +6,96 @@ import { Subscription } from 'rxjs';
 
 @Component({
    selector: 'app-level-list',
-   templateUrl: './level-list.component.html',
-   styleUrls: ['./level-list.component.scss']
+   templateUrl: './level-list.component.html'
 })
 export class LevelListComponent implements OnInit {
 
    title = "Level List";
    levels: Level[] = [];
-   level: Level;
-   selectedLevel: number;
+   selectedLevel: Level;
    mode: number = 0;
-   levelsSubscription: Subscription;
-   modeSubscription: Subscription;
-   selectedLevelSubscription: Subscription;
+   levelsSubscription: Subscription = new Subscription();
+   modeSubscription: Subscription = new Subscription();
 
    constructor(private levelService: LevelService, private router: Router, private route: ActivatedRoute) { }
 
    ngOnInit() {
+      
       this.levels = this.levelService.getLevels();
       this.levelsSubscription = this.levelService.activeLevels.subscribe(
-         (levels: Level[]) => this.levels = levels
+         (levels: Level[]) => {
+            this.levels = levels;
+            this.detectSelection();
+         }
       );
       this.modeSubscription = this.levelService.activeMode.subscribe(
          (mode: number) => this.mode = mode 
       );
-      this.selectedLevelSubscription = this.levelService.activeLevel.subscribe(
-         (level: Level) => this.selectedLevel = +level.id
-      );
-      
-      // Subscribe and redirect if there is any id used
-      this.route.data.subscribe(
-         (data: any) => {
-            var id = this.route.snapshot.params['id'];
-            console.log('id subscription: '+id);
-            if(id != undefined) {
-               console.log('navigate');
-               this.levelService.activeLevel.next(this.levelService.getLevel(id));
-               // this.router.navigate(["/levels"]);
-            }
-         }
-      );
+      this.detectMode();
    }
 
 
    ngOnDestroy() {
-      console.log('unsubscribe all');
+      console.log('Unsubscribe all from level list');
+      this.levelService.reset();
       this.levelsSubscription.unsubscribe();
       this.modeSubscription.unsubscribe();
-      this.selectedLevelSubscription.unsubscribe();
    }
 
 
    onSelect(level: Level) {
-      this.selectedLevel = level.id;
-      this.level = level;
-      
+      this.detectMode();
+      this.selectedLevel = level;
       this.levelService.setActiveLevel(level);
       switch (this.mode) {
          case 0: console.log("selected level: "+ level.id); break;
-         case 1: this.router.navigate([`/levels/add`]); break;
-         case 2: this.router.navigate([`/levels/details/${level.id}`]); break;
-         case 3: this.router.navigate([`/levels/edit/${level.id}`]); break;
+         case 1: break;
+         case 2: this.router.navigate([`/settings/levels/details/${level.id}`]); break;
+         case 3: this.router.navigate([`/settings/levels/edit/${level.id}`]); break;
          default: console.log("selected level: "+ level.id); break;
       }
    }
 
 
-   onAdd() {
-      this.mode = (this.mode==1) ? 0 : 1;
-      if(this.mode==1) {
+   onLevelAdd() {
+      if(this.mode !== 1) {
          this.levelService.activeMode.next(1);
-         this.router.navigate(['/levels/add']);
+         this.router.navigate(['/settings/levels/add']);
          console.log("On Add");
       } else {
-         this.router.navigate(['/levels']);
+         this.levelService.activeMode.next(0);
+         this.router.navigate(['/settings/levels']);
       }
    }
 
-
-   onDetails() {
-      this.mode = (this.mode==2) ? 0 : 2;
-      
-      if(this.mode==2) {
+   onLevelDetails() {
+      if(this.mode !== 2) {
          this.levelService.activeMode.next(2);
-         if(this.level != null) {
-            console.log('level id: '+ this.level.id);
-            this.levelService.activeLevel.next(this.level);
-            this.router.navigate(['/levels/details/'+this.level.id]);
+         if(this.selectedLevel != null) {
+            console.log('level id: '+ this.selectedLevel.id);
+            this.levelService.activeLevel.next(this.selectedLevel);
+            this.router.navigate(['/settings/levels/details/'+this.selectedLevel.id]);
+         } else {
+            this.router.navigate(['/settings/levels/details']);
          }
       } else {
-         this.router.navigate(['/levels']);
+         this.levelService.activeMode.next(0);
+         this.router.navigate(['/settings/levels']);
       }
    }
    
 
-   onEdit() {
-      this.mode = (this.mode==3) ? 0 : 3;
-      if(this.mode==3) {
+   onLevelEdit() {
+      if(this.mode !== 3) {
          this.levelService.activeMode.next(3);
-         if(this.level != null) {
-            console.log('level id: '+ this.level.id);
-            this.levelService.activeLevel.next(this.level);
-            this.router.navigate(['/levels/edit/'+this.level.id]);
+         if(this.selectedLevel != null) {
+            console.log('level id: '+ this.selectedLevel.id);
+            this.levelService.activeLevel.next(this.selectedLevel);
+            this.router.navigate(['/settings/levels/edit/'+this.selectedLevel.id]);
          }
       } else {
-         this.router.navigate(['/levels']);
+         this.levelService.activeMode.next(0);
+         this.router.navigate(['/settings/levels']);
       }
    }
 
@@ -118,7 +103,41 @@ export class LevelListComponent implements OnInit {
    onDelete(id: string) {
       console.log(id);
       this.levelService.deleteLevel(id).subscribe(
-         _ => this.levelService.getLevels()
+         () => this.levelService.getLevels()
       );
+   }
+
+   onWarning() {
+      console.log("Warning");
+   }
+
+   detectMode() {
+      let url = this.router.url;
+      if(url.includes("details")) {
+         this.mode = 2;
+      } else if(url.includes("edit")) {
+         this.mode = 3;
+      } else if(url.includes("add")) {
+         this.mode = 1;
+      } else {
+         this.mode = 0;
+      }
+      this.levelService.activeMode.next(this.mode);
+   }
+
+   detectSelection() {
+      let url = this.router.url;
+      let id: string = url.substring(url.lastIndexOf('/')+1);
+      let x: number = +id;
+      if(x > 0) {
+         let level: Level = this.levels.find(f => f.id === x);
+         if(level !== undefined) {
+            this.levelService.activeLevel.next(level);
+         } else {
+            this.levelService.activeMode.next(0);
+            this.router.navigate(["/settings/levels"]);
+         }
+      }
+      console.log("ID:"+ id);
    }
 }
