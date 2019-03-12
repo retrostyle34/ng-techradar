@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Router, ActivatedRoute } from '@angular/router';
+import { Router, ActivatedRoute, UrlTree, UrlSegment, PRIMARY_OUTLET } from '@angular/router';
 import { Level } from '../level';
 import { LevelService } from '../level.service';
 import { Subscription } from 'rxjs';
@@ -15,24 +15,29 @@ export class LevelListComponent implements OnInit {
    selectedLevel: Level;
    mode: number = 0;
    levelsSubscription: Subscription = new Subscription();
+   levelSubscription: Subscription = new Subscription();
    modeSubscription: Subscription = new Subscription();
 
    constructor(private levelService: LevelService, private router: Router, private route: ActivatedRoute) { }
 
-   ngOnInit() {
-      
-      this.levels = this.levelService.getLevels();
-      this.levelsSubscription = this.levelService.activeLevels.subscribe(
-         (levels: Level[]) => {
-            this.levels = levels;
-            this.detectSelection();
-         }
-      );
-      this.modeSubscription = this.levelService.activeMode.subscribe(
-         (mode: number) => this.mode = mode 
-      );
-      this.detectMode();
-   }
+    ngOnInit() {
+        this.levels = this.levelService.getLevels();
+        this.levelsSubscription = this.levelService.activeLevels.subscribe(
+            (levels: Level[]) => {
+                this.levels = levels;
+                this.detectSelection();
+            }
+        );
+        this.modeSubscription = this.levelService.activeMode.subscribe(
+            (mode: number) => this.mode = mode 
+        );
+        this.levelSubscription = this.levelService.activeLevel.subscribe(
+            (level: Level) => {
+                this.selectedLevel = level;
+            }
+        );
+        this.detectMode();
+    }
 
 
    ngOnDestroy() {
@@ -125,19 +130,23 @@ export class LevelListComponent implements OnInit {
       this.levelService.activeMode.next(this.mode);
    }
 
-   detectSelection() {
-      let url = this.router.url;
-      let id: string = url.substring(url.lastIndexOf('/')+1);
-      let x: number = +id;
-      if(x > 0) {
-         let level: Level = this.levels.find(f => f.id === x);
-         if(level !== undefined) {
-            this.levelService.activeLevel.next(level);
-         } else {
-            this.levelService.activeMode.next(0);
-            this.router.navigate(["/settings/levels"]);
-         }
-      }
-      console.log("ID:"+ id);
-   }
+    detectSelection() {
+        // let urlGroup: UrlTree = this.router.parseUrl(url);
+        // let segment: UrlSegment[] = urlGroup.root.children[PRIMARY_OUTLET].segments;
+        // console.log(segment[segment.length-1].path);
+        
+        let url = this.router.url;
+        let id: string = url.substring(url.lastIndexOf('/')+1);
+        let x: number = +id;
+        if(x > 0) {
+            let level: Level = this.levels.find(f => f.id === x);
+            if(level !== undefined) {
+                this.levelService.activeLevel.next(level);
+            } else {
+                this.levelService.activeMode.next(0);
+                this.router.navigate(["/settings/levels"]);
+            }
+        }
+        console.log("Selected Level: "+ id);
+    }
 }
