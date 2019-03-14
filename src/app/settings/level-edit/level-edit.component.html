@@ -15,26 +15,27 @@
                required!</div>
          </div>
       </div>
-
+      
       <div class="form-group form-row">
-         <label for="staticDetails" class="col-sm-3 form-label noselect">Details</label>
-         <div class="col-sm-9">
-            <textarea 
-               class="form-control form-control-sm small" 
-               id="staticDetails" 
-               name="details" 
-               rows="3"
-               ngModel>
-            </textarea>
+            <label for="staticDetails" class="col-sm-3 form-label noselect">Details</label>
+            <div class="col-sm-9">
+               <textarea 
+                  class="form-control form-control-sm small" 
+                  id="staticDetails" 
+                  name="details"
+                  rows="3"
+                  ngModel>
+               </textarea>
+            </div>
          </div>
-      </div>
+
       <div class="form-group form-row">
          <label for="staticLevel" class="col-sm-3 form-label noselect">Position</label>
          <div class="col-sm-9">
             <select 
                class="form-control form-control-sm" 
                id="staticLevel" 
-               name="level" 
+               name="position" 
                ngModel>
                <option>1</option>
                <option>2</option>
@@ -45,20 +46,23 @@
             </select>
          </div>
       </div>
+      
+
    </div>
+
    <div class="form-footer">
       <div class="form-row">
          <div class="col-sm-3"></div>
          <div class="col-sm-9">
             <button 
                class="btn btn-sm btn-secondary" 
-               (tsSubmitIfValid)="!formRef.pending && onSubmit()">
+               (tsSubmitIfValid)="onSubmit()">
                Add
             </button>
             <button 
                class="btn btn-sm btn-secondary ml-2" 
                [hidden]="!formRef.dirty" (click)="onClear()">
-               Clear
+               Reset
             </button>
             <button 
                class="btn btn-sm btn-secondary ml-2" 

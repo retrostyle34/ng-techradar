@@ -6,42 +6,47 @@ import { LevelService } from '../level.service';
 import { Router, ActivatedRoute } from '@angular/router';
 
 @Component({
-   selector: 'app-level-edit',
-   templateUrl: './level-edit.component.html'
+    selector: 'app-level-edit',
+    templateUrl: './level-edit.component.html'
 })
 export class LevelEditComponent implements OnInit, OnDestroy {
 
-   @ViewChild('formRef') form: NgForm;
-   submitted = false;
-   level: Level;
-   subscription: Subscription = new Subscription();
-   editMode = false;
+    level: Level;
+    mode: number = 0;
+    @ViewChild('formRef') form: NgForm;
+    subscription: Subscription = new Subscription();
 
-   constructor(private levelService: LevelService, private router: Router, private route: ActivatedRoute) { }
+    constructor(private levelService: LevelService, private router: Router, private route: ActivatedRoute) { }
 
-   ngOnInit() {
+    ngOnInit() {
+        this.subscription = this.levelService.activeLevel.subscribe(
+            (level: Level) => {
+                this.level = level;
+                this.form.setValue({
+                    name: level.name,
+                    position: level.orderNumber,
+                    details: level.details,
+                 });
+            }, error => console.log(error)
+        );
 
-      this.subscription = this.levelService.activeLevel.subscribe(
-         (level: Level) => {
-            console.log("sub");
-            
-            this.level = level;
-            this.editMode = true;
-            this.form.setValue({
-               name: level.name,
-               details: level.details,
-               position: level.orderNumber
-            });
-         }
-      );
-   }
+    }
 
-   ngOnDestroy() {
-      this.subscription.unsubscribe();
-   }
+    ngOnDestroy(): void {
+        this.subscription.unsubscribe();
+    }
 
-   clearForm() {
-      this.form.reset();
-   }
+    onSubmit() {
 
+    }
+
+    onClear() {
+        this.form.reset();
+    }
+
+    onCancel() {
+        this.form.reset();
+        this.levelService.reset();
+        this.router.navigate(['settings/levels']);
+    }
 }
