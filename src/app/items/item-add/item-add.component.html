@@ -1,75 +1,83 @@
-<h2>{{title}}</h2>
-<hr>
+<form #formRef="ngForm" class="form">
+   <div class="form-body">
+      <div class="form-group form-row">
+         <label for="name" class="col-sm-3 form-label noselect">Name</label>
+         <div class="col-sm-9">
+            <input 
+               type="text" 
+               id="name" 
+               name="name" 
+               #nameRef="ngModel" 
+               class="form-control form-control-sm"
+               [class.ng-touched]="nameRef.dirty && nameRef.invalid" 
+               ngModel 
+               required>
+            <div class="warning-section" *ngIf="nameRef.invalid && (nameRef.touched || nameRef.dirty)">Name is
+               required!</div>
+         </div>
+      </div>
 
-<form #formRef="ngForm">
-   <div class="form-group form-row">
-      <label for="staticName" class="col-sm-3 col-form-label">Name</label>
-      <div class="col-sm-9">
-         <input 
-            type="text" 
-            id="staticName"
-            name="name"
-            #nameRef="ngModel"
-            class="form-control form-control-sm" 
-            [class.ng-touched]="nameRef.dirty && nameRef.invalid"
-            ngModel
-            required
-         >
-         <div class="warning-block" *ngIf="nameRef.invalid && (nameRef.touched || nameRef.dirty)">Name is required!</div>
+      <div class="form-group form-row">
+         <label for="staticType" class="col-sm-3 form-label noselect">Type</label>
+         <div class="col-sm-9">
+            <input 
+               class="form-control form-control-sm small" 
+               type="text" 
+               id="staticType"
+               name="type"
+               ngModel
+            >
+         </div>
+      </div>
+      <div class="form-group form-row">
+         <label for="staticLevel" class="col-sm-3 form-label noselect">Level</label>
+         <div class="col-sm-9">
+            <select 
+               class="form-control form-control-sm small"
+               id="staticLevel"
+               name="level"
+               ngModel>
+               <option>Adopt</option>
+               <option>Trial</option>
+               <option>Access</option>
+               <option>Hold</option>
+            </select>
+         </div>
+      </div>
+      <div class="form-group form-row">
+         <label for="details" class="col-sm-3 form-label noselect">Details</label>
+         <div class="col-sm-9">
+            <textarea 
+               class="form-control form-control-sm small" 
+               id="details" 
+               name="details" 
+               rows="3"
+               ngModel>
+            </textarea>
+         </div>
       </div>
    </div>
-   <div class="form-group form-row">
-      <label for="staticType" class="col-sm-3 col-form-label">Type</label>
-      <div class="col-sm-9">
-         <input 
-            type="text" 
-            id="staticType"
-            name="type"
-            class="form-control form-control-sm" 
-            ngModel
-         >
+
+   <div class="form-footer">
+      <div class="form-row">
+         <div class="col-sm-3"></div>
+         <div class="col-sm-9">
+            <button 
+               class="btn btn-sm btn-secondary" 
+               (tsSubmitIfValid)="!formRef.pending && onSubmit()">
+               Add
+            </button>
+            <button 
+               class="btn btn-sm btn-secondary ml-2" 
+               [hidden]="!formRef.dirty" (click)="onClear()">
+               Clear
+            </button>
+            <button 
+               class="btn btn-sm btn-secondary ml-2" 
+               (click)="onCancel()">
+               Cancel
+            </button>
+         </div>
       </div>
    </div>
-   <div class="form-group form-row">
-      <label for="staticLevel" class="col-sm-3 col-form-label">Level</label>
-      <div class="col-sm-9">
-         <select 
-            class="form-control form-control-sm"
-            id="staticLevel"
-            name="level"
-            ngModel>
-            <option>Adopt</option>
-            <option>Trial</option>
-            <option>Access</option>
-            <option>Hold</option>
-         </select>
-      </div>
-   </div>
-   <div class="form-group form-row">
-      <label for="staticDetails" class="col-sm-3 col-form-label">Details</label>
-      <div class="col-sm-9">
-         <textarea 
-            class="form-control form-control-sm" 
-            id="staticDetails" 
-            name="details"
-            rows="3"
-            ngModel>
-         </textarea>
-      </div>
-   </div>
-   <hr>
-   <button 
-      class="btn btn-sm btn-secondary" 
-      data-toggle="button" aria-pressed="false" autocomplete="off"
-      type="submit" (tsSubmitIfValid)="onSubmit()"
-      [disabled]="submitted">{{ submitted ? 'Submitting...' : 'Add'}}</button>
-   <button 
-      type="button"
-      class="btn btn-sm btn-secondary ml-2" 
-      [hidden]="formRef.values !== null"
-      (click)="clearForm()">Clear</button>
-   <button 
-      type="button"
-      class="btn btn-sm btn-secondary ml-2" 
-      (click)="onCancel()">Cancel</button>
 </form>

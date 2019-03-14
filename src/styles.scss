@@ -137,7 +137,7 @@ a {
    background-color: #6e7074;
 }
 .form-row {
-   margin: 0.3rem 0;
+   margin: 0;
 }
 .form-body {
    padding: 1rem 10px 5px 10px;
@@ -163,11 +163,26 @@ a {
    border: 1px solid #5b5d5f;
 }
 
+.form-control-plaintext {
+   color: #cacaca !important;
+}
+
 .info-box {
    padding: 0.6rem;
    font-size: 1rem;
    color: #ccc;
    text-align: center;
+}
+
+.details-row {
+   margin: 0 0.3rem;
+   display: flex;
+}
+
+.details-section {
+   padding: 0.6rem;
+   font-size: 1rem;
+   color: #ccc;
 }
 
 .warning-section {
@@ -192,12 +207,17 @@ textarea {
    overflow: auto;
 }
 
-textarea.small { height: 1.6rem !important; }
-textarea.medium { height: 3.2rem !important; }
-textarea.large { height: 4.8rem !important; }
+textarea.small { min-height: 1.6rem !important; max-height: 6.4rem; height: 1.6rem; }
+textarea.medium { min-height: 3.2rem !important; max-height: 6.4rem; height: 3.2rem;}
+textarea.large { min-height: 4.8rem !important; max-height: 6.4rem; height: 4.8rem;}
 
 label.form-label {
    color: #9fbadd;
+   padding: 0;
+}
+
+label.details-label {
+   color: #cacaca;
    padding: 0;
 }
 
@@ -237,9 +257,22 @@ button.btn.btn-sm.btn-secondary {
    border: 1px solid #b1b1b1;
    -webkit-border-radius: 10px;
 }
+::-webkit-scrollbar-corner {
+   border: none;
+   background-color: #6e7074;
+}
 ::-webkit-resizer{
    background-color: #eee;
    border: 9px solid rgba(0,0,0,.1); 
    border-top-color: rgba(0,0,0,.5); 
    border-left-color: rgba(0,0,0,.5); 
 }
+
+// ::-webkit-scrollbar              { /* 1 */ }
+// ::-webkit-scrollbar-button       { /* 2 */ }
+// ::-webkit-scrollbar-track        { /* 3 */ }
+// ::-webkit-scrollbar-track-piece  { /* 4 */ }
+// ::-webkit-scrollbar-thumb        { /* 5 */ }
+// ::-webkit-scrollbar-corner       { /* 6 */ }
+// ::-webkit-resizer                { /* 7 */ }
+// link: https://css-tricks.com/custom-scrollbars-in-webkit/

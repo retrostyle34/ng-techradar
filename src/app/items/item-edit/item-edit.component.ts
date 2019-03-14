@@ -13,10 +13,10 @@ export class ItemEditComponent implements OnInit, OnDestroy {
 
    title: string = 'New Item';
 
-   @ViewChild('f') form: NgForm;
+   @ViewChild('formRef') form: NgForm;
    submitted = false;
-   item : Item; 
-   subscription: Subscription;
+   item: Item; 
+   subscription: Subscription = new Subscription();
    editMode = false;
 
 
@@ -50,7 +50,6 @@ export class ItemEditComponent implements OnInit, OnDestroy {
             console.log('mode subscription: '+data['mode']);
          }
       );
-      
    }
 
    ngOnDestroy() {

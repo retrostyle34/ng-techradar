@@ -12,11 +12,12 @@
             class="far fa-eye list-mode" 
             title="Show Details">
          </i>
-         <i addMode="/items" (click)="onAdd()" title="Add New"></i>
+         <i listMode="add" listSection="/items" listIcon="fa fa-plus" (click)="onAdd()" title="Add New"></i>
       </h2>
    </div>
 </div>
 <hr>
+<ng-content></ng-content>
 
 <div>
    <ul class="list-group mt-2">
