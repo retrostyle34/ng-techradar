@@ -32,6 +32,8 @@ export class ItemEditComponent implements OnInit, OnDestroy {
             
             if(data['mode']==3) {
                var id = this.route.snapshot.params['id'];
+               console.log("ID: "+ id);
+               
                this.itemService.getItem(id);
 
                this.subscription = this.itemService.activeItem.subscribe(

@@ -1,35 +1,36 @@
 <link rel='stylesheet' href='https://use.fontawesome.com/releases/v5.6.3/css/all.css'>
 <div>
-   <div> 
-      <h2><a>{{title}}</a>
-         <i (click)="onEdit()" 
-            [ngClass]="(mode==3)?'list-mode-active':'list-mode'"
-            class="fas fa-pencil-alt list-mode"  
-            title="Edit Mode">
-         </i>
-         <i (click)="onDetails()" 
-            [ngClass]="(mode==2)?'list-mode-active':'list-mode'"
-            class="far fa-eye list-mode" 
-            title="Show Details">
-         </i>
-         <i listMode="add" listSection="/items" listIcon="fa fa-plus" (click)="onAdd()" title="Add New"></i>
-      </h2>
-   </div>
+    <div>
+        <h2><a>{{title}}</a>
+            <i  (click)="onEdit()" 
+                [class.active]="mode === 3" 
+                class="fas fa-pencil-alt list-mode" 
+                title="Edit Mode">
+            </i>
+            <i  (click)="onDetails()" 
+                [class.active]="mode === 2" 
+                class="far fa-eye list-mode" 
+                title="Show Details">
+            </i>
+            <i  listMode="add" 
+                listSection="/items" 
+                listIcon="fas fa-plus list-mode" 
+                (click)="onAdd()" 
+                title="Add New">
+            </i>
+        </h2>
+    </div>
 </div>
 <hr>
 <ng-content></ng-content>
 
 <div>
-   <ul class="list-group mt-2">
-      <li class="list-group-item list-row" 
-         *ngFor="let item of items; let i = index;"
-         (click)="onSelect(item)"
-         [class.selected]="selectedItem === item">
-         <span class="no-decor">{{item.name}}</span>
-         <span 
-            (click)="onDelete(item.id)" 
-            class="list-group-delete right">X
-         </span>
-      </li>
-   </ul>
+    <ul class="list-group mt-2">
+        <li class="list-group-item list-row" *ngFor="let item of items; let i = index;" (click)="onSelect(item)"
+            [class.selected]="selectedItem === item">
+            <span class="no-decor">{{item.name}}</span>
+            <span (click)="onDelete(item.id)" class="list-group-delete right">X
+            </span>
+        </li>
+    </ul>
 </div>

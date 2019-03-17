@@ -1,14 +1,53 @@
 <link rel='stylesheet' href='https://use.fontawesome.com/releases/v5.6.3/css/all.css'>
 <div class="container col-sm-8">
 
-   <div class="col-sm-6 module left">
-      <app-level-list>
+    <div class="col-sm-6 module left">
+        <h2><a>{{title}}</a></h2>
+        <hr>
+        
+        <h3>Level List
+            <i (click)="onLevelEdit()" 
+               [class.active]="mode === 3"
+               class="fas fa-pencil-alt list-mode"  
+               title="Edit Mode">
+            </i>
+            <i (click)="onLevelDetails()" 
+               [class.active]="mode === 2"
+               class="far fa-eye list-mode" 
+               title="Show Details">
+            </i>
+            <i (click)="onLevelAdd()" 
+               [class.active]="mode === 1"
+               class="fas fa-plus list-mode" 
+               title="Add new level">
+            </i>
+         </h3>
          <router-outlet></router-outlet>
-      </app-level-list>
-   </div>
+         <!-- <ng-content></ng-content> -->
+         
+         <div>
+            <ul class="list-group mt-2">
+               <li class="list-group-item list-row" 
+                  *ngFor="let level of levels; let i = index;"
+                  (click)="onSelect(level)"
+                  [class.selected]="selectedLevel === level">
+                  <span class="no-decor">{{level.name}}</span>
+                  <span 
+                     (click)="onDelete(level.id)" 
+                     class="list-group-delete right">X
+                  </span>
+               </li>
+            </ul>
+         </div>
 
-   <div class="col-sm-6 module right">
-      <app-visual-board></app-visual-board>
-   </div>
+
+         <br>
+        
+        <!-- <app-category-list></app-cattegory-list> -->
+    </div>
+
+    <div class="col-sm-6 module right">
+        <app-visual-board></app-visual-board>
+    </div>
 
 </div>

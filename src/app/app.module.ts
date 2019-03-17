@@ -17,10 +17,8 @@ import { SettingsComponent } from './settings/settings.component';
 import { LevelAddComponent } from './settings/level-add/level-add.component';
 import { LevelEditComponent } from './settings/level-edit/level-edit.component';
 import { LevelListComponent } from './settings/level-list/level-list.component';
-import { TypeEditComponent } from './settings/type-edit/type-edit.component';
-import { TypeListComponent } from './settings/type-list/type-list.component';
-import { TypeNewComponent } from './settings/type-new/type-new.component';
-import { Item } from './items/item';
+// import { CategoryAddComponent } from './settings/category-add/category-add.component';
+// import { CategoryEditComponent } from './settings/category-edit/category-edit.component';
 import { HttpClientModule } from '@angular/common/http';
 import { SubmitIfValidDirective } from './shared/submit.directive';
 import { LevelDetailsComponent } from './settings/level-details/level-details.component';
@@ -43,9 +41,8 @@ import { DetailsDirective } from './shared/details.directive';
       LevelEditComponent,
       LevelAddComponent,
       SettingsComponent,
-      TypeListComponent,
-      TypeEditComponent,
-      TypeNewComponent,
+    //   CategoryAddComponent,
+    //   CategoryEditComponent,
       SubmitIfValidDirective,
       AddDirective,
       DetailsDirective,
